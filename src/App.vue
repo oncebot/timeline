@@ -1,43 +1,38 @@
 <template>
   <div id="app">
-      
+      <div class="container">
+        <range-row v-for="start in starts" :start="start" :final="end"></range-row>
+      </div>
   </div>
 </template>
 
 <script>
+import RangeRow from '@/components/RangeRow';
 export default {
   name: 'app',
-  components: {
-  },
-  computed:{
-    chunks(){
-        const start = -1000;
-        const end = 2018;
-        const chunkSize = 10;
-        const years = [];
-        let i = start;
-        let temp = [];
-        while (i<=end) {
-          if(temp.length == 10){
-            years.push(temp);
-            temp = [];
-          }else{
-            temp.push(i);
-            i+=10
-          }
-        }
-      if(temp.length){
-        years.push(temp);
-      }
-      if(!years[years.length-1].includes(end)){
-        years[years.length-1].push(end);
-      }
-      return years;
+  data(){
+    return {
+      start:-1000,
+      end:2018,
     }
   },
-  created(){
-    console.log(this.chunks);
-  }
+  components: {
+    RangeRow,
+  },
+  computed:{
+    starts(){
+        const years = [];
+        let i = this.start;
+        while (i<=this.end) {
+          if(i==0){
+            i=1;
+          }
+          years.push(i);
+          i+=100;
+        }
+        return years;
+    },
+  },
 }
 </script>
 
@@ -46,8 +41,11 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.container{
+  max-width: 900px;
+  margin: auto;
 }
 </style>
