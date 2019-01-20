@@ -1,17 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'app',
   components: {
-    HelloWorld
+  },
+  computed:{
+    chunks(){
+        const start = -1000;
+        const end = 2018;
+        const chunkSize = 10;
+        const years = [];
+        let i = start;
+        let temp = [];
+        while (i<=end) {
+          if(temp.length == 10){
+            years.push(temp);
+            temp = [];
+          }else{
+            temp.push(i);
+            i+=10
+          }
+        }
+      if(temp.length){
+        years.push(temp);
+      }
+      if(!years[years.length-1].includes(end)){
+        years[years.length-1].push(end);
+      }
+      return years;
+    }
+  },
+  created(){
+    console.log(this.chunks);
   }
 }
 </script>
