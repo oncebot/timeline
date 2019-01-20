@@ -1,25 +1,18 @@
 <template>
     <div class="row">
         <div class="title">{{ start_mod }}</div>
-               <div class="flex-1"><div v-for="year in range" class="block"></div></div>
+               <div class="flex-1">
+                   <block-item v-for="year in range" :current="current" :year="year"></block-item>
+               </div>
         <div class="title">{{ end_mod }}</div>
     </div>
 </template>
 <script>
 import axios from 'axios';
+import BlockItem from '@/components/BlockItem';
 export default {
     props:['start','final','current'],
-    methods:{
-        has_year(year){
-            if(this.current){
-                console.log(this.current);
-                if(this.current.yob >= year && this.current.yod <= year){
-                    return true;
-                }
-            }
-            return false;
-        }
-    },
+    components:{BlockItem},
     computed:{
         end(){
             const end = this.start+99;
@@ -69,15 +62,7 @@ export default {
     }
     .title{
         flex-basis: 200px;
-    }
-    .block{
-        width:20px;
-        height:20px;
-        display: inline-block;
-        margin:5px;
-        background: #000;
-    }
-    .active{
-        background: yellow;
+        text-align: center;
+        font-weight: 500;
     }
 </style>
