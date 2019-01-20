@@ -6,12 +6,34 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
-    props:['start','final'],
+    props:['start','final','current'],
+    methods:{
+        has_year(year){
+            if(this.current){
+                console.log(this.current);
+                if(this.current.yob >= year && this.current.yod <= year){
+                    return true;
+                }
+            }
+            return false;
+        }
+    },
     computed:{
         end(){
             const end = this.start+99;
             return (end<this.final)?end:this.final;
+        },
+        years(){
+            let i = this.start;
+            const end = this.end;
+            const years = [];
+            while(i<=end){  
+                years.push(i);
+                i++;
+            }
+            return years;            
         },
         range(){
             let i = this.start;
@@ -22,6 +44,9 @@ export default {
                 range.push(i);
                 }
                 i++;
+            }
+            if(range[range.length-1]<this.final && end >= this.final){
+                range.push(end);
             }
             return range;
         },
@@ -51,5 +76,8 @@ export default {
         display: inline-block;
         margin:5px;
         background: #000;
+    }
+    .active{
+        background: yellow;
     }
 </style>
