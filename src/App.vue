@@ -70,13 +70,14 @@ export default {
 <style>
 body{
   background: #333;
+  margin:0px;
+  padding:0px;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #fff;
-  margin-top: 60px;
 }
 .container{
   max-width: 700px;

@@ -46,4 +46,18 @@ export default {
         margin:5px;
         display: inline-block;
     }
+    @media screen and (max-width:720px){
+    .block{
+        width:2px;
+        height:2px;
+        margin:8px;
+    }
+        .active{
+        width:15px;
+        height:15px;
+        margin:1px;
+        }
+    }
+
+
 </style>
